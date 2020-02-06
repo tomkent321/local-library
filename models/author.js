@@ -36,7 +36,11 @@ AuthorSchema.virtual('name').get(function() {
 
 //Virtual for author's lifespan
 AuthorSchema.virtual('lifespan').get(function() {
-  return this.date_of_death.getYear() - this.date_of_birth.getYear();
+  if (this.date_of_death && this.date_of_birth) {
+    return `Lifespan: ${this.date_of_death.getYear() - this.date_of_birth.getYear()} years.`;
+  } else {
+    return 'lifespan unknown';
+  }
 });
 
 //Virtual for author's URL
